@@ -3,26 +3,41 @@ import {Layout} from "antd";
 import styles from './App.module.sass';
 import 'antd/dist/reset.css';
 import Tasks from "./pages/Tasks.tsx";
+import TaskDetails from "./components/TaskDetails.tsx";
+import {useEffect, useState } from 'react';
 
 const {Header, Content, Sider} = Layout;
 
 function App() {
-    return (
-        <Layout className={styles.layout}>
-            <Header className={styles.header}></Header>
-            <Layout>
-                <Sider className={styles.sider}>
-                </Sider>
-                <Content className={styles.content}>
-                    <Routes>
-                        <Route path="/" element={<Tasks/>}/>
-                        <Route path="/tasks" element={<div>Задачи</div>}/>
-                        <Route path="/task/:id" element={<div>Детали задачи</div>}/>
-                    </Routes>
-                </Content>
-            </Layout>
-        </Layout>
-    );
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return (
+    <Layout className={styles.layout}>
+      <Header className={styles.header}></Header>
+      <Layout>
+        {!isMobile && (
+          <Sider className={styles.sider}>
+          </Sider>
+        )}
+        <Content className={styles.content}>
+          <Routes>
+            <Route path="/" element={<Tasks/>}/>
+            <Route path="/task/:id" element={<TaskDetails/>}/>
+          </Routes>
+        </Content>
+      </Layout>
+    </Layout>
+  );
 }
 
 export default App;

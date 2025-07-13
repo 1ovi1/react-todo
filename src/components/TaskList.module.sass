@@ -1,0 +1,133 @@
+.listItem
+  display: flex
+  align-items: center
+  padding: 16px
+  border-bottom: 1px solid rgba(255, 255, 255, .06)
+  background-color: #21212F
+
+  &:hover
+    background-color: #282834
+
+  &:last-child
+    border-bottom-left-radius: 8px
+    border-bottom-right-radius: 8px
+
+.statusCollapse
+  :global(.ant-collapse-item)
+    margin-bottom: 16px
+    border: 1px solid gray !important
+    border-radius: 8px 8px 0 0 !important
+
+  :global(.ant-collapse-item-active)
+    border-radius: 8px !important
+
+  :global(.ant-collapse-header)
+    font-weight: 600
+    color: #bbbec5 !important
+    font-size: 16px
+    border-radius: 8px 8px 0 0 !important
+
+  :global(.ant-collapse-item:nth-child(1) .ant-collapse-header)
+    background: linear-gradient(90deg, #222c42, #1a1a28) !important
+
+  :global(.ant-collapse-item:nth-child(2) .ant-collapse-header)
+    background: linear-gradient(90deg, #362d2c, #1a1a28) !important
+
+  :global(.ant-collapse-item:nth-child(3) .ant-collapse-header)
+    background: linear-gradient(90deg, #282a38, #1a1a28) !important
+
+  :global(.ant-collapse-content .ant-collapse-content-box)
+    padding-block: 0 !important
+    padding: 0
+
+.itemContent
+  display: flex
+  align-items: center
+  width: 100%
+  justify-content: space-between
+  gap: 8px
+  padding: 0 12px
+  color: inherit
+
+.editButton
+  color: #FFF !important
+  padding: 4px 8px
+
+  &:hover
+    text-decoration: underline
+
+.taskActions
+  display: flex
+  align-items: center
+  margin-left: auto
+
+.priorityIcon
+  font-size: 16px
+
+  &.high
+    color: #ff4d4f
+
+  &.medium
+    color: #faad14
+
+  &.low
+    color: #52c41a
+
+.taskDetails
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  align-items: center
+  flex: 1
+  min-width: 0
+  gap: 12px
+
+.taskTitle
+  display: inline-flex
+  align-items: center
+  font-size: 16px
+  font-weight: 500
+  overflow: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+  max-width: 100%
+
+  a
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+    max-width: 100%
+    color: #FFF
+
+    &:hover
+      text-decoration: underline
+
+.tag
+  display: inline-flex
+  align-items: center
+  gap: 4px
+  padding: 4px 8px
+  border-radius: 16px
+  font-size: 12px
+  background-color: #262633
+  color: #898990
+
+.tagDot
+  width: 6px
+  height: 6px
+  border-radius: 50%
+
+  &.bug
+    background-color: #ff4d4f
+
+  &.feature
+    background-color: #1890ff
+
+  &.documentation
+    background-color: #722ed1
+
+  &.refactor
+    background-color: #faad14
+
+  &.test
+    background-color: #52c41a
