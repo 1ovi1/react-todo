@@ -206,6 +206,7 @@ function TaskDetails() {
             label="Название"
             name="title"
             rules={[{required: true, message: 'Введите название задачи'}]}
+            className={styles.formItem}
           >
             <Input
               placeholder="Введите название задачи"
@@ -216,6 +217,7 @@ function TaskDetails() {
           <Form.Item
             label="Описание"
             name="description"
+            className={styles.formItem}
           >
             <TextArea
               rows={4}
