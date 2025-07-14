@@ -1,0 +1,119 @@
+.container
+  max-width: 800px
+  margin: 0 auto
+  padding: 24px
+
+.card
+  background: #21212F
+  border: 1px solid #333
+  border-radius: 8px
+
+.title
+  color: #FFF !important
+  margin-bottom: 24px
+
+.form
+  .ant-form-item-label > label
+    color: #FFF !important
+
+.input, .textarea
+  background: #1a1a28 !important
+  border: 1px solid #333 !important
+  color: #FFF !important
+
+  &::placeholder
+    color: #666 !important
+
+  &:focus
+    border-color: #1890ff !important
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2) !important
+
+.dropdownsContainer
+  display: flex
+  gap: 16px
+  margin-bottom: 24px
+  flex-wrap: wrap
+
+.dropdownItem
+  display: flex
+  flex-direction: column
+  gap: 8px
+  flex: 1
+  min-width: 200px
+
+  label
+    color: #FFF
+    font-weight: 500
+
+.dropdownButton
+  width: 100%
+  background: #1a1a28 !important
+  border: 1px solid #333 !important
+  color: #FFF !important
+  text-align: left
+  justify-content: space-between
+
+  &:hover
+    border-color: #1890ff !important
+
+.buttonContainer
+  display: flex
+  gap: 12px
+  justify-content: flex-end
+
+.cancelButton
+  background: transparent !important
+  border: 1px solid #333 !important
+  color: #FFF !important
+
+  &:hover
+    border-color: #666 !important
+
+.saveButton
+  background: #1890ff !important
+  border: 1px solid #1890ff !important
+
+  &:hover
+    background: #40a9ff !important
+    border-color: #40a9ff !important
+
+.tagDot
+  width: 6px
+  height: 6px
+  border-radius: 50%
+
+  &.bug
+    background-color: #ff4d4f
+
+  &.feature
+    background-color: #1890ff
+
+  &.documentation
+    background-color: #722ed1
+
+  &.refactor
+    background-color: #faad14
+
+  &.test
+    background-color: #52c41a
+
+.dropdownLabel
+  display: flex
+  align-items: center
+  gap: 8px
+
+@media (max-width: 768px)
+  .container
+    padding: 16px
+
+  .dropdownsContainer
+    flex-direction: column
+
+  .dropdownItem
+    min-width: 100%
+
+  .buttonContainer
+    flex-direction: column-reverse
+
+    .cancelButton, .saveButton
+      width: 100%

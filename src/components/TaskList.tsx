@@ -9,11 +9,9 @@ import {
   Loading3QuartersOutlined,
   EditOutlined
 } from "@ant-design/icons";
-import styles from './TaskList.module.sass';
+import styles from './styles/TaskList.module.sass';
 import type {Task} from "../interfaces/task.interface.ts";
 import { useNavigate } from "react-router-dom";
-
-const {Panel} = Collapse;
 
 const getPriorityIcon = (priority: string) => {
   switch (priority) {
@@ -48,44 +46,79 @@ function TaskList() {
     navigate(`/tasks/${task.id}`, { state: { task } });
   };
 
-  //Это нужно, потому что поставил цель скопировать huly.io
   const getTasksByStatus = (status: string) => {
     return tasks.filter(task => task.status === status);
   };
 
-  //Это нужно, потому что поставил цель скопировать huly.io
   const renderTaskList = (tasks: Task[]) => (
     <List
       dataSource={tasks}
       renderItem={(item: Task) =>
         <List.Item className={styles.listItem}>
           <div className={styles.itemContent}>
-            {getPriorityIcon(item.priority)}
             <div className={styles.taskDetails}>
-              <span className={styles.taskTitle} onClick={() => handleTaskClick(item)}
-              >
+              {getPriorityIcon(item.priority)}
+              <span className={styles.taskTitle} onClick={() => handleTaskClick(item)}>
                 <a>{item.title}</a>
               </span>
+            </div>
+            <div className={styles.taskAdditional}>
               <div className={styles.tag}>
                 <span className={`${styles.tagDot} ${styles[item.tag]}`}></span>
                 {item.tag}
               </div>
+              <Divider type="vertical" className={styles.divider} size={"small"}/>
+              <Button
+                type="text"
+                icon={<EditOutlined/>}
+                size="small"
+                className={styles.editButton}
+                onClick={() => handleTaskClick(item)}
+              >
+                Редактировать
+              </Button>
             </div>
-            <Divider type="vertical"/>
-            <Button
-              type="text"
-              icon={<EditOutlined/>}
-              size="small"
-              className={styles.editButton}
-              onClick={() => handleTaskClick(item)}
-            >
-              Редактировать
-            </Button>
           </div>
         </List.Item>
       }
     />
   );
+
+  const collapseItems = [
+    {
+      key: '1',
+      label: (
+        <span>
+          {getStatusIcon('in-progress')}
+          In Progress
+        </span>
+      ),
+      children: renderTaskList(getTasksByStatus('in-progress')),
+      className: styles.panelInProgress
+    },
+    {
+      key: '2',
+      label: (
+        <span>
+          {getStatusIcon('todo')}
+          Todo
+        </span>
+      ),
+      children: renderTaskList(getTasksByStatus('todo')),
+      className: styles.panelTodo
+    },
+    {
+      key: '3',
+      label: (
+        <span>
+          {getStatusIcon('done')}
+          Completed
+        </span>
+      ),
+      children: renderTaskList(getTasksByStatus('done')),
+      className: styles.panelCompleted
+    }
+  ];
 
   return (
     <div>
@@ -93,44 +126,8 @@ function TaskList() {
         defaultActiveKey={['1', '2', '3']}
         className={styles.statusCollapse}
         ghost
-      >
-        <Panel
-          header={
-            <span>
-        {getStatusIcon('in-progress')}
-              In Progress
-      </span>
-          }
-          key="1"
-          className={styles.panelInProgress}
-        >
-          {renderTaskList(getTasksByStatus('in-progress'))}
-        </Panel>
-        <Panel
-          header={
-            <span>
-        {getStatusIcon('todo')}
-              Todo
-      </span>
-          }
-          key="2"
-          className={styles.panelTodo}
-        >
-          {renderTaskList(getTasksByStatus('todo'))}
-        </Panel>
-        <Panel
-          header={
-            <span>
-        {getStatusIcon('done')}
-              Completed
-      </span>
-          }
-          key="3"
-          className={styles.panelCompleted}
-        >
-          {renderTaskList(getTasksByStatus('done'))}
-        </Panel>
-      </Collapse>
+        items={collapseItems}
+      />
     </div>
   );
 }
